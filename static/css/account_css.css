@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&display=swap');
+:root {
+    --primaryColor: #FF5733;
+    --mainHover1: #34495E;
+    --mainBlack1: #17202A  ;
+    --mainWhite: #ffff;
+    --mainSpacing: 0.1rem;
+    --mainTransition: all 0.3s linear;
+  }
+  
+  * { margin: 0; padding: 0; }
+  body{ font: "Lato", Sans-Serif; } 
+  html{ overflow-y: hidden; }
+  
+  body{
+      background-color:var(--mainBlack1);
+  }
+  
+.hero{
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0) !important;
+    position:fixed;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--mainWhite);
+    z-index: 0;
+  
+    }
+
+ .account-card{
+    width: 400px;
+    height: 450px;
+    background: rgba(23, 32, 42  ,1);
+    z-index: 1;
+    display: flex;
+    opacity:1 !important;
+    align-items: center;
+    justify-content: center;
+    
+    padding: 1rem;
+    position: absolute;
+    
+    border-radius: 0px;
+    box-shadow: 15px 20px 80px 1px rgba(0,0,0,0.75);
+
+ }
+
+ .time{
+  z-index: 10;
+  position: absolute;
+margin-top: 280px;
+font-family: 'Montserrat', sans-serif;
+font-size: 48pt;
+justify-content: unset;
+color: var(--mainWhite);
+    
+ }
