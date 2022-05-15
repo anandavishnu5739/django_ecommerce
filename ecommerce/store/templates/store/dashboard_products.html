@@ -1,0 +1,52 @@
+{% load static %}
+{% include 'store/dashboard.html' %}
+{% block content %}
+
+
+<div class="product-table">
+
+<table class="table">
+    <thead class="thead-dark">
+      <tr style="font-family: 'Lato', sans-serif !important;">
+        <th style="font-family: 'Lato', sans-serif;" scope="col">&nbsp Image</th>
+        <th style="font-family: 'Lato', sans-serif;" scope="col">Name</th>
+        <th style="font-family: 'Lato', sans-serif;" scope="col">Qty</th>
+        <th style="font-family: 'Lato', sans-serif;" scope="col">Selling Price</th>
+        <th style="font-family: 'Lato', sans-serif;" scope="col">Marked Price</th>
+        <th style="font-family: 'Lato', sans-serif;" scope="col">Department</th>
+        <th style="font-family: 'Lato', sans-serif;" scope="col">Status</th>
+        <th style="font-family: 'Lato', sans-serif;" scope="col">Published on</th>
+        <th ></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+        {%for rs in content %}
+      <tr>
+        <th scope="row"><img style="width:80px; height: auto;" src="{{rs.image.url}}" alt="product-image"></th>
+    
+        <td style="font-family: 'Lato', sans-serif;">{{rs.name}}</td>
+        <td style="font-family: 'Lato', sans-serif;">{{rs.quantity}}</td>
+        <td style="font-family: 'Lato', sans-serif;">&#8377 {{rs.price}}</td>
+        <td style="font-family: 'Lato', sans-serif;">&#8377 {{rs.strike_out_price}}</td>
+        <td style="font-family: 'Lato', sans-serif;">{{rs.category}}</td>
+        
+        {% if rs.status == '1' %}
+        <td style="font-family: 'Lato', sans-serif;">Published</td>
+        {% else %}
+        <td style="font-family: 'Lato', sans-serif;">Draft</td>
+        {% endif %}
+        <td style="font-family: 'Lato', sans-serif;">{{rs.dateadded}}</td>
+        <td><a href="{% url 'edit_products' rs.id %}" class="btn btn-secondary btn-sm active" role="button" aria-pressed="true">Edit</a></td>
+        <td><a href="{% url 'delete_products' rs.id %}" class="btn btn-danger btn-sm active" role="button" aria-pressed="true">Delete</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  
+
+</div>
+
+
+
+{% endblock content %}

@@ -1,0 +1,40 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+
+{% if productcategory %}
+<div class="row display-row">
+{% for product in productcategory %}
+
+
+     
+<div class="card display-card"  style="width: 15rem;">
+    <a class="btn btn-sm wish-btn" href="#"><i class="far fa-heart"></i></a>
+
+    
+    <img src="{{product.imageURL}}" href="{% url 'view_product' product.id %}" class="card-img-top product-image" alt="product.name">
+    <div class="card-body">
+      <p style="font-size: 12pt;" class="card-title">{{product.category}}</p>
+      <p style="font-size: 10pt; color: grey;" class="card-text">{{product.name}}</p>
+     <hr>
+     <h6 style ="display: inline-block; color:blueviolet;">&#8377 {{product.price|floatformat:2}} &nbsp;&nbsp; &nbsp;&nbsp;</h6>
+     {% if product.strike_out_price == blank %}
+     <h6 style ="display: none;float: left; color:grey; text-decoration: line-through;">&#8377 {{product.strike_out_price|floatformat:2}} </h6>
+     {% else %}
+     <h6 style ="display: inline-block; color:grey; text-decoration: line-through;">&#8377 {{product.strike_out_price|floatformat:2}} </h6>
+     {% endif %}
+      <button data-product={{product.id}}  data-action="add" class="btn btn-primary btn-sm add-btn update-cart"><i class="fab fa-opencart small-cart"></i> Add to Cart</button><br>
+      <a class="btn btn-sm view-btn " href="{% url 'view_product' product.id %}" id="productview"><i class="far fa-eye"></i> View</a>
+    </div>
+  </div>
+  {% endfor %}
+{% else %}
+
+<h1>Content unavailable</h1>
+
+{% endif %}
+
+</div>
+
+{% endblock content %}
+

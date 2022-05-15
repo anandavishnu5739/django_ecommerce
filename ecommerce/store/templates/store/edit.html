@@ -1,0 +1,40 @@
+{% load static %}
+{% include 'store/dashboard.html' %}
+{% block content %}
+
+<div class="add-products-field">
+    <div class="card" style="max-width:calc(100% - 10px); border: none; z-index: 0; margin-right: 10px; top: 65px; margin-left: 190px; max-height: auto;">
+  <div class="card mb-3" style="max-width:calc(100% - 10px); margin-right: 10px;  max-height: 100%; border: none;">
+    <div class="row no-gutters">
+      <div class="col-md-4">
+        
+        <img id="image" src="{{details.image.url}}" style="margin-top: 20%;" class="card-img product-prevew">
+        <div style="margin-top: 0%; transition: all 0.3s ease;" class="save-img save1">
+            <a>
+              <span class="icon"><i class="fas fa-file-upload"></i></i></span>
+              <span class="title title1">&nbsp Change image</span>
+          </a>
+        </div>
+    </div>
+      <div class="col-md-8">
+        <div class="card-body form-container">
+          <h5 class="card-title">Modify {{details.name}}</h5>
+          <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{form}}
+        
+        <input class="btn btn-primary save-btn" type="submit" value="SAVE" name="Update Information">
+        </form></div>
+      </div>
+    </div>
+  </div>
+  </div>
+  </div>
+<script>
+    $(".save-img").click(function(){
+    $(".image-btn").click(); 
+    return false;
+});
+</script> 
+
+{% endblock content %}

@@ -1,0 +1,164 @@
+{% load widget_tweaks %}
+{% load static %}
+{% include 'store/dashboard.html' %}
+{% block content %}
+
+<div class="add-products-field">
+  <div class="card" style="max-width:calc(100% - 10px); z-index: 0; margin-right: 10px; top: 65px; border: none; margin-left: 190px; max-height: auto;">
+<div class="card mb-3" style="max-width:calc(100% - 10px); margin-right: 10px;  max-height: 100%; border: none;">
+  <div class="row no-gutters">
+    <div class="col-md-4">
+
+      <img id="image"  style="position: absolute;" class="card-img product-prevew">
+      <div class=" save-img">
+        
+        <a>
+      
+          <span><i class="fas fa-file-upload"></i></span>
+          <span class="title title1">&nbsp Upload image</span>
+      </a>
+    </div>
+    </div>
+    <div class="col-md-8">
+      <div class="card-body form-container">
+        <div style="display: flex;">
+        <h5 class="card-title">Add products</h5> 
+        <button style="margin-left: auto; margin-right: 5rem; margin-bottom: 1rem !important; " id="catbutton" class="btn btn-sm btn-outline-success my-2 my-sm-0">Departments</button>
+      </div>
+        <form method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          {{form}}
+      
+      <input class="btn btn-primary save-btn" type="submit" value="SAVE" name="Update Information">
+
+    </form></div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+<script type='text/javascript'>
+
+$(".save-img").click(function(){
+    $(".image-btn").click(); 
+    return false;
+});
+  
+document.getElementById("id_image").onchange = function () {
+    var reader = new FileReader();
+    
+    reader.onload = function (e) {
+        
+        document.getElementById("image").src = e.target.result;
+        
+    };
+
+
+    reader.readAsDataURL(this.files[0]);
+};
+  
+
+  
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+<div class="bg-modal">
+
+    <div class="modal-content animate">
+          <div class="close-modal"><i id="addcatclose" class="fas fa-times"></i></div>
+          <h5>ADD NEW CATEGORY</h5>
+          <div class="form-group">
+          <form action="" method="POST">
+
+              {% csrf_token %}
+              {{category_form.as_p}}
+              
+              <button style="align-self: center;" type="submit" class="btn btn-primary btn-sm">Save</button>
+          </form>
+      </div>
+
+      </div>
+   </div>
+
+   <div class="bg-modal-delete">
+
+    <div class="modal-content-delete animate">
+        <div style="top: 0;background-color: #ffff; opacity: 1; padding-bottom: 3rem;">
+          <div class="close-modal"><i id="catclose" class="fas fa-times"></i></div>
+          <h5>Available Department(s)</h5>
+          <button style="float: right;" id="addcatbutton" class="btn btn-primary btn-sm active" type="submit"><i class="fas fa-folder-plus"></i> New</button>
+        </div>
+        <div class="scroll-table">
+          <table style="padding-top: 10rem;" class="table table-striped">
+
+
+            <thead>
+              <tr>
+                
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for rs in category %}
+              <tr>
+                <th scope="row">{{rs.name}}</th>
+                <td><a href="{% url 'delete_category' rs.id %}" class="btn btn-danger btn-sm active" role="button" aria-pressed="true"><i class="fas fa-trash"></i> Delete</a></td>
+
+                
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+
+      </div>
+  
+   
+   <script>
+    document.getElementById('addcatbutton').addEventListener('click',
+    function(){
+        document.querySelector('.bg-modal-delete').style.display="none";
+
+        document.querySelector('.bg-modal').style.display="flex";
+    })
+    
+    
+    document.getElementById('addcatclose').addEventListener('click',
+    function(){
+        document.querySelector('.bg-modal').style.display="none";
+    })
+    
+
+    document.getElementById('catbutton').addEventListener('click',
+    function(){
+        document.querySelector('.bg-modal-delete').style.display="flex";
+    })
+    
+    
+    document.getElementById('catclose').addEventListener('click',
+    function(){
+        document.querySelector('.bg-modal-delete').style.display="none";
+    })
+      
+    
+    
+    
+    </script>
+
+
+
+
+
+{% endblock content %}

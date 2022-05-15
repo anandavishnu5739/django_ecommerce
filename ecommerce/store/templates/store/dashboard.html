@@ -1,0 +1,95 @@
+{% load static %}
+{% include 'store/bootstrap_secondary.html' %}
+
+{% block content %}
+
+
+
+
+<div class="wrapper">
+    <div class="top_navbar">
+        <div class="hamburger">
+          <a class="navbar-brand" href="{% url 'dashboard' %}"> <img class="dashboard-logo" src="{% static 'images/logo/dashboard_logo/logo.png' %}" alt="My image"></a>
+
+        </div>
+        <div class="top_menu">
+         
+            {% for name in site_name %} 
+            <h5>{{name.primry_name}}</h5>
+            {% endfor %}
+          
+            <div class="logo">{{name.primry_name}} Dashboard</div>
+            <ul>
+                <li><a href="#"><i class="fas fa-search"></i></a></li>
+                <li><a href="#"><i class="far fa-bell"></i></a></li>
+                <li><a href="{% url 'login' %}"><i class="fas fa-user"></i></a></li>
+            </ul>
+
+        </div>
+    </div>
+    <div class="sidebar">
+        <ul>
+        <li><a href="{% url 'settings' %}" >
+            <span class="icon"><i class="fas fa-tools"></i></span>
+            <span class="title">Settings</span>
+        </a></li>
+        <li><a href="{% url 'store' %}">
+            <span class="icon"><i class="fas fa-desktop"></i></span>
+            <span class="title">View site</span>
+        </a></li>
+        <li><a href="{% url 'product_dashboard' %}">
+            <span class="icon"><i class="fas fa-pallet"></i></span>
+            <span class="title">Products</span>
+        </a></li>
+        <li class="icon-pdts"><a href="{% url 'add_product' %}">
+            <span><i class="fas fa-folder-plus"></i></i></span>
+            
+        </a></li>
+        <a href="{% url 'add_product' %}" class="btn product-btn add_product_btn" role="button" aria-pressed="true">Add products</a>
+        <li class="icon-time" style="margin-left:1.5rem; margin-top:30%;">
+        <span style="font-size: 15pt; color: #52BE80; font-family: 'Lato', sans-serif;" id="time"></span>
+
+    </a></li>
+       
+
+
+        <p class= "count" style="color: #E9967A; margin-left: 2.5rem; margin-top: 70%;">{{product_count}} Products</p>
+    </ul>
+    </div>
+</div>
+ 
+
+
+<script>
+    function startTime() {
+      var today = new Date();
+      
+      var h = today.getHours();
+      var m = today.getMinutes();
+      var s = today.getSeconds();
+      var session = "AM";
+      if(h == 0){
+        h = 12;
+    }
+
+    if(h > 12){
+        h = h - 12;
+        session = "PM";
+    }
+
+      m = checkTime(m);
+      s = checkTime(s);
+      document.getElementById('time').innerHTML =
+      h + ":" + m + ":" + s +" " + session;
+
+      var t = setTimeout(startTime, 500);
+    }
+    function checkTime(i) {
+      if (i < 10) {i = "0" + i};  
+      return i;
+    }
+    </script>
+    </head>
+
+{% endblock content %}
+
